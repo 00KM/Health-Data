@@ -1,1 +1,46 @@
-print("hi world')
+#Compare how many with health insurance (65+-) did not get mental health care due to cost (rows)
+
+
+#Would using web scraping be beneficial?
+#What will I do with the data I’ve found?  
+#Will I look at the distribution of data?
+#Do I need to perform calculations?
+#Is it necessary to plot and predict/extrapolate data?
+                                                                                          #Step 3: Conclusions and Results: Presentation & Code
+#Describe what you created or tested, 
+#Explain what conclusions you were able to draw based on the data.
+#Explain lessons-learned as a result of the project and coding.
+
+health_data=https://data.cdc.gov/api/views/25m4-6qqq/rows.json?accessType=DOWNLOAD
+
+import requests
+
+url = 'https://data.cdc.gov/api/views/25m4-6qqq/rows.json?accessType=DOWNLOAD'
+
+# We already opened the json file and read lines
+  # TODO: extract header to get column names
+response = requests.get(url)
+lines = response.text.splitlines()
+reader = json.reader(lines) 
+  # Turn the json reader into a list so we can index it
+all_rows = list(reader)
+header = all_rows[0]
+data_rows = all_rows[1:]
+
+  # TODO: obtain user input for dog breed
+condition_input=input("Enter a condition: ").strip().lower()
+condition_found=False
+  # TODO: parse each line
+for row in data_rows:
+  item=row[0:].strip().lower()
+  if item==breed_input:
+    condition_found= True
+    print("\nCondition found!")
+    for col_name, value in zip(header, row):
+        print(f"{col_name}: {value}")
+    break
+
+
+        # TODO: check if user input matches breed name
+if not breed_found:
+    print(f"\nSorry, breed '{breed_input}' was not found in the dataset.")
